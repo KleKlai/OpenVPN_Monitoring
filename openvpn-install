@@ -41,11 +41,11 @@ apt-get $OPT install nginx php5.6 php5.6-fpm php5.6-cli php5.6-mysql php5.6-mcry
 
 # WEB DATA
 cd /var/www/html
-wget "https://raw.githubusercontent.com/X-DCB/Unix/master/openvpn/webfiles-simple.tar" -qO- | tar x
+wget "https://raw.githubusercontent.com/KleKlai/OpenVPN_Monitoring/master/webfiles-simple.tar" -qO- | tar x
 mv *html oldhtml
 
 # MYSQL SETTINGS
-wget -qO- https://raw.githubusercontent.com/X-DCB/Unix/master/openvpn/table.sql | mysql -uroot
+wget -qO- https://raw.githubusercontent.com/KleKlai/OpenVPN_Monitoring/master/table.sql | mysql -uroot
 
 # NGINX AND PHP 5.6 SETTINGS
 wget -qO /etc/nginx/nginx.conf "http://script.hostingtermurah.net/repo/blog/ocspanel-centos6/nginx.conf"
@@ -59,12 +59,12 @@ sed -i '/root/{s/\/.*/\/var\/www\/html;/g}' /etc/nginx/conf.d/vps.conf
 
 # OPENVPN SERVER SETTINGS
 cd /etc/openvpn;mkdir log
-wget "https://raw.githubusercontent.com/X-DCB/Unix/master/openvpn/openvpn_X-DCB.tar" -qO- | tar x
+wget "https://raw.githubusercontent.com/KleKlai/OpenVPN_Monitoring/master/openvpn_X-DCB.tar" -qO- | tar x
 chmod -R a+x {script,keys}
 if [[ `cat script/config.sh` =~ "CPASS" ]];then
 	sed -i "/CPASS/{s/=.*/=$cnf/g}" script/config.sh
 else echo "CPASS=$cnf" >> script/config.sh; fi
-wget -q https://raw.githubusercontent.com/X-DCB/Unix/master/openvpn/1194.conf
+wget -q https://raw.githubusercontent.com/KleKlai/OpenVPN_Monitoring/master/1194.conf
 sed -i '/net.ipv4.ip_forward/{s/#//g}' /etc/sysctl.conf
 sysctl -p
 
@@ -107,7 +107,7 @@ chmod +x {/sbin/iptab,/etc/systemd/system/iptab.service}
 # install squid
 sq=$([ -d /etc/squid ] && echo squid || echo squid3)
 [ ! -f /etc/$sq/squid.confx ] && mv /etc/$sq/squid.conf /etc/$sq/squid.confx
-wget -qO- https://raw.githubusercontent.com/X-DCB/Unix/master/openvpn/squid.conf | sed -e "s/#http_access/$shre/g" | sed -e "s/x.x.x.x/$MYIP/g" > /etc/$sq/squid.conf
+wget -qO- https://raw.githubusercontent.com/KleKlai/OpenVPN_Monitoring/master/squid.conf | sed -e "s/#http_access/$shre/g" | sed -e "s/x.x.x.x/$MYIP/g" > /etc/$sq/squid.conf
 
 # set timezone
 cp /usr/share/zoneinfo/Asia/Manila /etc/localtime

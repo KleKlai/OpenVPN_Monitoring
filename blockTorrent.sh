@@ -34,6 +34,6 @@ torrentx() {
 torrentx OUTPUT
 torrentx FORWARD
 clear
-wget -qO- "https://raw.githubusercontent.com/X-DCB/Unix/master/banner" | bash
+# wget -qO- "https://raw.githubusercontent.com/X-DCB/Unix/master/banner" | bash
 echo -e "Torrent may not be fully blocked yet the speed becomes slower.
 Send me a feedback because this is only a test and will be official if it works."
